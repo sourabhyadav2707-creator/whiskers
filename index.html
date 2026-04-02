@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whiskers Waitlist</title>
+    <link rel="icon" type="image/png" href="./whiskers.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="currency-layer" aria-hidden="true">
+      <span class="currency-mark mark-one">$</span>
+      <span class="currency-mark mark-two">₹</span>
+      <span class="currency-mark mark-three">$</span>
+      <span class="currency-mark mark-four">₹</span>
+    </div>
+    <main class="page-shell">
+      <section class="hero-card">
+        <p class="brand">Whiskers</p>
+        <h1>Earn from what you post.</h1>
+        <form class="waitlist-form" id="waitlist-form">
+          <label class="sr-only" for="waitlist-email">Email</label>
+          <input
+            id="waitlist-email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+          />
+          <button type="submit">Join waitlist</button>
+        </form>
+        <p class="form-note" id="form-note">Early access for creators.</p>
+      </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
