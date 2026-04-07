@@ -17,10 +17,15 @@
       <span class="currency-mark mark-three">$</span>
       <span class="currency-mark mark-four">₹</span>
     </div>
+
     <main class="page-shell">
       <section class="hero-card">
-        <p class="brand">Whiskers</p>
-        <h1>Earn from what you post.</h1>
+        <div class="hero-copy">
+          <p class="brand">Whiskers</p>
+          <h1>Earn from what you post.</h1>
+          <p class="form-note" id="form-note">Early access for creators.</p>
+        </div>
+
         <form class="waitlist-form" id="waitlist-form">
           <label class="sr-only" for="waitlist-email">Email</label>
           <input
@@ -31,9 +36,22 @@
             autocomplete="email"
             required
           />
+
+          <label class="sr-only" for="instagram-username">Instagram username</label>
+          <div class="handle-field">
+            <span>@</span>
+            <input
+              id="instagram-username"
+              name="instagram_username"
+              type="text"
+              placeholder="instagram"
+              autocomplete="username"
+              required
+            />
+          </div>
+
           <button type="submit">Join waitlist</button>
         </form>
-        <p class="form-note" id="form-note">Early access for creators.</p>
       </section>
     </main>
 

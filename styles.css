@@ -1,7 +1,6 @@
 :root {
-  --bg: #f6fbff;
-  --paper: rgba(255, 255, 255, 0.76);
-  --paper-strong: rgba(255, 255, 255, 0.92);
+  --paper: rgba(255, 255, 255, 0.78);
+  --paper-strong: rgba(255, 255, 255, 0.94);
   --border: rgba(25, 52, 70, 0.08);
   --text: #183244;
   --muted: #6b8090;
@@ -36,7 +35,6 @@ body::before,
 body::after {
   content: "";
   position: fixed;
-  inset: auto;
   pointer-events: none;
 }
 
@@ -109,8 +107,12 @@ body::after {
 }
 
 .hero-card {
-  width: min(100%, 34rem);
-  padding: 1.35rem;
+  width: min(100%, 68rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(24rem, 28rem);
+  gap: 2rem;
+  align-items: center;
+  padding: 1.8rem;
   border-radius: 2rem;
   background: var(--paper);
   border: 1px solid var(--border);
@@ -126,6 +128,11 @@ body::after {
   border-radius: inherit;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(232, 245, 253, 0.08));
   pointer-events: none;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
@@ -146,12 +153,14 @@ h1 {
 
 .waitlist-form {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
-  padding: 0.55rem;
+  padding: 0.75rem;
   border-radius: 1.4rem;
   background: var(--paper-strong);
   border: 1px solid rgba(25, 52, 70, 0.06);
+  position: relative;
+  z-index: 1;
 }
 
 .waitlist-form input,
@@ -174,6 +183,24 @@ h1 {
   color: var(--muted);
 }
 
+.handle-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  border-radius: 1rem;
+  background: transparent;
+}
+
+.handle-field span {
+  padding-left: 1.05rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.handle-field input {
+  padding-left: 0.35rem;
+}
+
 .waitlist-form button {
   padding: 1rem 1.2rem;
   border-radius: 1rem;
@@ -181,7 +208,7 @@ h1 {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 140ms ease, opacity 140ms ease, background 140ms ease;
+  transition: transform 140ms ease, background 140ms ease;
 }
 
 .waitlist-form button:hover {
@@ -189,21 +216,15 @@ h1 {
   background: #0078b6;
 }
 
+.waitlist-form button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
 .form-note {
   margin: 0.95rem 0 0;
   color: var(--muted);
   font-size: 0.92rem;
-}
-
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-
-  50% {
-    transform: translate3d(0, -14px, 0) rotate(-4deg);
-  }
 }
 
 .sr-only {
@@ -218,8 +239,20 @@ h1 {
   border: 0;
 }
 
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(-4deg);
+  }
+}
+
 @media (max-width: 640px) {
   .hero-card {
+    grid-template-columns: 1fr;
     padding: 1rem;
     border-radius: 1.6rem;
   }
@@ -228,14 +261,6 @@ h1 {
     margin: 0.9rem 0 1.2rem;
     max-width: 9ch;
     font-size: clamp(2.6rem, 14vw, 4rem);
-  }
-
-  .waitlist-form {
-    grid-template-columns: 1fr;
-  }
-
-  .waitlist-form button {
-    width: 100%;
   }
 
   .currency-mark {

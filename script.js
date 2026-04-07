@@ -6,13 +6,15 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 const form = document.getElementById("waitlist-form");
 const emailInput = document.getElementById("waitlist-email");
+const instagramInput = document.getElementById("instagram-username");
 const submitButton = form.querySelector('button[type="submit"]');
 const formNote = document.getElementById("form-note");
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const instagramPattern = /^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
 
 function setSubmittingState(isSubmitting) {
   submitButton.disabled = isSubmitting;
-  submitButton.textContent = isSubmitting ? "Joining..." : "Join waitlist";
+  submitButton.textContent = isSubmitting ? "Joining" : "Join waitlist";
 }
 
 emailInput.addEventListener("input", () => {
@@ -20,10 +22,18 @@ emailInput.addEventListener("input", () => {
   formNote.textContent = "Early access for creators.";
 });
 
+instagramInput.addEventListener("input", () => {
+  instagramInput.value = instagramInput.value.replace(/^@+/, "").replace(/\s+/g, "");
+  instagramInput.setCustomValidity("");
+  formNote.textContent = "Early access for creators.";
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const email = emailInput.value.trim();
+  const instagramUsername = instagramInput.value.trim().replace(/^@+/, "");
+
   if (!emailPattern.test(email)) {
     emailInput.setCustomValidity("Please enter a valid email address.");
     emailInput.reportValidity();
@@ -31,9 +41,19 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
+  if (!instagramPattern.test(instagramUsername)) {
+    instagramInput.setCustomValidity("Enter a valid Instagram username.");
+    instagramInput.reportValidity();
+    formNote.textContent = "Enter a valid Instagram username.";
+    return;
+  }
+
   setSubmittingState(true);
 
-  const { error } = await supabase.from("waitlist").insert({ email });
+  const { error } = await supabase.from("waitlist").insert({
+    email,
+    instagram_username: instagramUsername,
+  });
 
   if (error) {
     const duplicateEmail = error.code === "23505" || /duplicate|unique/i.test(error.message);
